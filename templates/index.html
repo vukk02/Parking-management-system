@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt chỗ</title>
+    <style>
+        /* Định dạng chung */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            background: url('static/2.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 0 10px;
+            padding: 5px 10px;
+        }
+
+        .navbar a:hover {
+            background-color: #007BFF;
+            border-radius: 5px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 80vh;
+            text-align: center;
+        }
+
+        .home h1 {
+            font-size: 50px;
+            font-weight: bold;
+            margin-top: 400px;
+        }
+
+        .home p {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+        .booking form {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .booking form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .booking form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .booking form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .booking form button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="/home">Home</a>
+        <a href="/booking">Booking</a>
+    </div>
+
+    <!-- Container -->
+    <div class="container">
+        <!-- Trang Home -->
+        <div class="home" id="home">
+            <h1>Welcome to Booking System</h1>
+            <p>Contact us at: 0123 456 789 | Address: 123 Main Street, City</p>
+        </div>
+
+        <!-- Trang Booking -->
+        <div class="booking" id="booking" style="display: none;">
+            <form action="/submit" method="POST" onsubmit="showSuccess(event)">
+                <label for="name">Tên:</label>
+                <input type="text" id="name" name="name" placeholder="Nhập tên của bạn" required>
+
+                <label for="phone">SĐT:</label>
+                <input type="text" id="phone" name="phone" placeholder="Nhập số điện thoại" required>
+
+                <label for="reservation_time">Thời gian đặt:</label>
+                <input type="datetime-local" id="reservation_time" name="reservation_time" required>
+
+                <label for="license_plate">Biển số:</label>
+                <input type="text" id="license_plate" name="license_plate" placeholder="Nhập biển số xe" required>
+
+                <button type="submit">Đặt chỗ</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2024 Hệ thống đặt chỗ. Tất cả các quyền được bảo lưu.
+    </footer>
+
+    <!-- Script -->
+    <script>
+        // Chuyển đổi giữa các trang
+        document.querySelectorAll('.navbar a').forEach(link => {
+            link.addEventListener('click', event => {
+                event.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+
+                document.querySelectorAll('.container > div').forEach(section => {
+                    section.style.display = section.id === targetId ? 'block' : 'none';
+                });
+            });
+        });
+
+        // Hiển thị thông báo khi đặt chỗ thành công
+        function showSuccess(event) {
+            event.preventDefault();
+            alert('Đặt chỗ thành công!');
+            event.target.submit();
+        }
+    </script>
+</body>
+</html>
